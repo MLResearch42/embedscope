@@ -1,4 +1,4 @@
-"""Gain a clue by clustering: interactive charts for exploring text embeddings."""
+"""embedscope: interactive charts for exploring text embeddings."""
 
 import re
 import warnings
@@ -7,7 +7,7 @@ import altair as alt
 import numpy as np
 import pandas as pd
 
-__all__ = ["plot_text", "plot_text_comparison", "ClueWidget"]
+__all__ = ["plot_text", "plot_text_comparison", "ScopeWidget"]
 
 # Number of example texts shown next to the scatter plot.
 _MAX_TEXT_ROWS = 17
@@ -253,17 +253,17 @@ def _layout(scatters, df, brush, legend, top_words):
 
 
 def _finish(chart, df, coord_cols, color_type, widget):
-    """Return a plain Altair chart, or a ClueWidget that can report its selection back to Python."""
+    """Return a plain Altair chart, or a ScopeWidget that can report its selection back to Python."""
     if not widget:
         return chart
     try:
         import anywidget  # noqa: F401
     except ImportError as e:
         raise ImportError(
-            "`widget=True` needs the anywidget package. Install it with: python -m pip install 'cluestar[widget]'"
+            "`widget=True` needs the anywidget package. Install it with: python -m pip install 'embedscope[widget]'"
         ) from e
     columns = ["text", *coord_cols] + (["color"] if color_type else [])
-    return ClueWidget(chart, data=df[columns])
+    return ScopeWidget(chart, data=df[columns])
 
 
 def plot_text(
@@ -292,9 +292,9 @@ def plot_text(
           Click a word in the legend to filter on it.
         - `disable_warning`: disable the standard altair max rows warning
         - `top_words`: how many words to show in the "top words" panel; use 0 to hide it
-        - `widget`: if True, return a `ClueWidget`. Display it in a notebook, select points,
+        - `widget`: if True, return a `ScopeWidget`. Display it in a notebook, select points,
           then call `.selected()` to get the selected rows back as a DataFrame.
-          Needs `pip install 'cluestar[widget]'`.
+          Needs `pip install 'embedscope[widget]'`.
     """
     if disable_warning:
         alt.data_transformers.disable_max_rows()
@@ -306,7 +306,14 @@ def plot_text(
     brush, legend = _make_params(color_type)
 
     scatter = _scatter(
-        df, "x1", "x2", brush, legend, color_type, color_sort, title="Document Embedding Space"
+        df,
+        "x1",
+        "x2",
+        brush,
+        legend,
+        color_type,
+        color_sort,
+        title="Document Embedding Space",
     )
     chart = _layout([scatter], df, brush, legend, top_words)
     return _finish(chart, df, ["x1", "x2"], color_type, widget)
@@ -335,7 +342,7 @@ def plot_text_comparison(
         - `color_array`: values to color the points by; see `plot_text`
         - `color_words`: list of words to highlight; see `plot_text`
         - `top_words`: how many words to show in the "top words" panel; use 0 to hide it
-        - `widget`: if True, return a `ClueWidget` whose `.selected()` method returns the selected rows
+        - `widget`: if True, return a `ScopeWidget` whose `.selected()` method returns the selected rows
     """
     if disable_warning:
         alt.data_transformers.disable_max_rows()
@@ -378,9 +385,9 @@ except AttributeError:  # pragma: no cover - very old altair
     _JupyterChart = object
 
 
-class ClueWidget(_JupyterChart):
+class ScopeWidget(_JupyterChart):
     """
-    A cluestar chart as a Jupyter widget, so the selection you make can be used in Python.
+    An embedscope chart as a Jupyter widget, so the selection you make can be used in Python.
 
     Created by `plot_text(..., widget=True)` or `plot_text_comparison(..., widget=True)`.
     Display it in a notebook cell, select points with the mouse, then call `.selected()`.

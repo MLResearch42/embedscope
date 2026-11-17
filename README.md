@@ -1,33 +1,54 @@
-<img src="cluestar.png" width=175 align="right">
+# embedscope
 
-### cluestar
+> Look inside your text embeddings.
 
-> Gain a clue by clustering!
+embedscope makes interactive charts that help you explore text data. Plot your texts
+in two dimensions, drag a rectangle over a cluster, and see what is in it: how many
+texts, what they say, and which words they share. Then pull the selection straight
+back into Python to label it, export it or dig further.
 
-This library contains visualisation tools that might help you
-get started with classification tasks. The idea is that if you
-can inspect clusters easily, you might gain a clue on what
-good labels for your dataset might be!
-
-It generates charts that looks like this:
+It's handy at the start of a classification project, when you are still figuring out
+what good labels for your dataset might be.
 
 ![Normal plot](gif.gif)
 
-There's even a fancy chart that can compare embedding techniques.
+You can also compare two embedding techniques side by side.
 
 ![Comparing two embeddings](gif-multi.gif)
 
 ## Install
 
 ```text
-python -m pip install cluestar
+python -m pip install embedscope
 ```
 
-## Interactive Demo
+To get selections back into Python (see below), install the widget extra:
 
-You can see an interactive demo of the generated widgets [here](https://koaning.github.io/cluestar/).
+```text
+python -m pip install "embedscope[widget]"
+```
 
-You can also toy around with the demo notebook found [here](https://github.com/koaning/cluestar/blob/main/notebooks/overview.ipynb).
+Requires Python 3.10 or newer.
+
+## Coming from cluestar?
+
+embedscope is a maintained fork of [cluestar](https://github.com/koaning/cluestar) by
+Vincent D. Warmerdam. The functions and arguments are the same, so switching is a
+one-line change:
+
+```python
+# from cluestar import plot_text, plot_text_comparison
+from embedscope import plot_text, plot_text_comparison
+```
+
+What's new compared to cluestar 0.2.1:
+
+- Works on a fresh install with current Python, Altair, pandas and numpy.
+- A live "N of M selected" count and a "top words" panel.
+- Cluster ids and labels become categories, and you can click the legend to filter.
+- `widget=True` lets you get the selected rows back as a DataFrame.
+
+You can toy around with the demo notebook found [here](https://github.com/MLResearch42/embedscope/blob/main/notebooks/overview.ipynb).
 
 ## Usage
 
@@ -46,7 +67,7 @@ X = pipe.fit_transform(texts)
 From here you can make an interactive chart via;
 
 ```python
-from cluestar import plot_text
+from embedscope import plot_text
 
 plot_text(X, texts)
 ```
@@ -101,7 +122,7 @@ straight into your notebook, for example to label them or to export them.
 This needs one extra package:
 
 ```text
-python -m pip install "cluestar[widget]"
+python -m pip install "embedscope[widget]"
 ```
 
 ```python
@@ -123,10 +144,15 @@ You can also compare two embeddings interactively. Selecting points in one
 chart highlights the same texts in the other.
 
 ```python
-from cluestar import plot_text_comparison
+from embedscope import plot_text_comparison
 
 plot_text_comparison(X1, X2, texts)
 ```
 
 `plot_text_comparison` takes the same `color_array`, `color_words`, `top_words` and
 `widget` arguments as `plot_text`.
+
+## Credits
+
+embedscope started as a fork of [cluestar](https://github.com/koaning/cluestar),
+created by Vincent D. Warmerdam and released under the MIT license. Thanks, Vincent!

@@ -3,12 +3,12 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cluestar"
-version = "0.3.0"
-description = "Gain a clue by clustering!"
+name = "embedscope"
+version = "0.1.0"
+description = "Interactive charts to look inside your text embeddings. A maintained fork of cluestar."
 readme = "README.md"
 license = { text = "MIT" }
-authors = [{ name = "Vincent D. Warmerdam" }]
+authors = [{ name = "MLResearch42" }]
 requires-python = ">=3.10"
 dependencies = [
     "altair>=5.1.0",
@@ -25,7 +25,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Topic :: Scientific/Engineering",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Visualization",
 ]
+keywords = ["embeddings", "text", "clustering", "visualization", "altair", "nlp"]
 
 [project.optional-dependencies]
 widget = ["anywidget>=0.9"]
@@ -40,9 +42,9 @@ dev = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/koaning/cluestar/"
-"Source Code" = "https://github.com/koaning/cluestar/"
-"Issue Tracker" = "https://github.com/koaning/cluestar/issues"
+Documentation = "https://github.com/MLResearch42/embedscope"
+"Source Code" = "https://github.com/MLResearch42/embedscope"
+"Issue Tracker" = "https://github.com/MLResearch42/embedscope/issues"
 
 [tool.setuptools.packages.find]
-include = ["cluestar*"]
+include = ["embedscope*"]

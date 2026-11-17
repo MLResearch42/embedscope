@@ -1,8 +1,8 @@
 black:
-	black --target-version py310 cluestar tests
+	black --target-version py310 embedscope tests
 
 flake:
-	flake8 cluestar tests
+	flake8 embedscope tests
 
 install:
 	python -m pip install --upgrade pip
@@ -10,7 +10,7 @@ install:
 	python -m pip install black flake8 isort interrogate twine wheel
 
 interrogate:
-	interrogate -vv --ignore-nested-functions --ignore-semiprivate --ignore-private --ignore-magic --ignore-module --ignore-init-method --fail-under 100 cluestar
+	interrogate -vv --ignore-nested-functions --ignore-semiprivate --ignore-private --ignore-magic --ignore-module --ignore-init-method --fail-under 100 embedscope
 
 pypi:
 	python -m pip install --upgrade build twine

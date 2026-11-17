@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cluestar import ClueWidget, plot_text, plot_text_comparison
+from embedscope import ScopeWidget, plot_text, plot_text_comparison
 
 
 @pytest.mark.parametrize("s", [500, 1000, 2000])
@@ -111,7 +111,7 @@ def _select(widget, brush=None, legend=None):
 def test_widget_selection_round_trip():
     pytest.importorskip("anywidget")
     w = plot_text(X, TEXTS, color_words=["late", "voucher"], widget=True)
-    assert isinstance(w, ClueWidget)
+    assert isinstance(w, ScopeWidget)
     assert len(w.selected()) == 6  # nothing selected -> everything
 
     _select(w, brush={"x1": [4, 6], "x2": [4, 6]})

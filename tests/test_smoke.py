@@ -68,8 +68,8 @@ def test_categories_get_clickable_legend_but_scales_do_not():
 def test_top_words_panel_can_be_hidden():
     with_words = plot_text(X, TEXTS).to_json()
     without_words = plot_text(X, TEXTS, top_words=0).to_json()
-    assert "top words" in with_words
-    assert "top words" not in without_words
+    assert "Top Words" in with_words
+    assert "Top Words" not in without_words
 
 
 def test_accepts_dataframe_and_series_inputs():

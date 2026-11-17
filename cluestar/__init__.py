@@ -230,7 +230,7 @@ def _words_panel(df, brush, legend, top_words):
             ),
             tooltip=["word:N", "texts:Q"],
         )
-        .properties(width=180, height=alt.Step(18), title="top words")
+        .properties(width=180, height=alt.Step(18), title="Top Words")
     )
 
 
@@ -306,7 +306,7 @@ def plot_text(
     brush, legend = _make_params(color_type)
 
     scatter = _scatter(
-        df, "x1", "x2", brush, legend, color_type, color_sort, title="embedding space"
+        df, "x1", "x2", brush, legend, color_type, color_sort, title="Document Embedding Space"
     )
     chart = _layout([scatter], df, brush, legend, top_words)
     return _finish(chart, df, ["x1", "x2"], color_type, widget)
@@ -355,7 +355,7 @@ def plot_text_comparison(
             legend,
             color_type,
             color_sort,
-            title="embedding space X1",
+            title="Embedding Space X1",
         ),
         _scatter(
             df,
@@ -365,7 +365,7 @@ def plot_text_comparison(
             legend,
             color_type,
             color_sort,
-            title="embedding space X2",
+            title="Embedding Space X2",
         ),
     ]
     chart = _layout(scatters, df, brush, legend, top_words)

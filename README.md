@@ -10,11 +10,11 @@ back into Python to label it, export it or dig further.
 It's handy at the start of a classification project, when you are still figuring out
 what good labels for your dataset might be.
 
-![Normal plot](gif.gif)
+![Brushing a cluster updates the count, texts and top words; clicking the legend filters by category](https://raw.githubusercontent.com/MLResearch42/embedscope/main/images/demo.gif)
 
 You can also compare two embedding techniques side by side.
 
-![Comparing two embeddings](gif-multi.gif)
+![Brushing in one embedding highlights the same texts in the other](https://raw.githubusercontent.com/MLResearch42/embedscope/main/images/demo-compare.gif)
 
 ## Install
 
